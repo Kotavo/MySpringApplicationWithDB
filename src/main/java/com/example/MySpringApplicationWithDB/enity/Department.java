@@ -26,6 +26,7 @@ public class Department {
 
     private String location;
 
+    @Transient
     private boolean isDeleted = false;
 
     public Department(DepartmentDto departmentDto) {

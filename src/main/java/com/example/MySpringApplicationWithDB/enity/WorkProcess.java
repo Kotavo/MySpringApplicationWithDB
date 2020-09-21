@@ -24,6 +24,7 @@ public class WorkProcess {
 
     private Long employee;
 
+    @Transient
     private boolean isDeleted = false;
 
     public WorkProcess(WorkProcessDto workProcessDto){
