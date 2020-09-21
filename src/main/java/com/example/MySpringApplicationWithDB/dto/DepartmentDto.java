@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.beans.Transient;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +26,7 @@ public class DepartmentDto {
         this.name = department.getName();
         this.location = department.getLocation();
     }
-
+    @Transient
     public boolean isValid(){
        return !name.isEmpty() && !location.isEmpty();
 

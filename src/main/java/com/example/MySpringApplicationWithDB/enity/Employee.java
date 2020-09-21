@@ -33,7 +33,6 @@ public class Employee {
 
     private Long department;
 
-    @Transient
     private boolean isDeleted = false;
 
     public Employee(EmployeeDto employeeDto) {

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.beans.Transient;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +26,7 @@ public class WorkProcessDto {
         this.employee = workProcess.getEmployee();
     }
 
+    @Transient
     public boolean isValid(){
         return !description.isEmpty() && employee != null;
     }

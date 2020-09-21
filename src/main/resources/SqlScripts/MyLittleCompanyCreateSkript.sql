@@ -8,13 +8,13 @@ CREATE DATABASE "MyLittleCompany"
     CONNECTION LIMIT = -1;
 
 CREATE TABLE departments (
-	id serial CONSTRAINT department_id PRIMARY KEY,
+	id serial CONSTRAINT id PRIMARY KEY,
 	name varchar(40),
 	location varchar(40)
 );
 
 CREATE TABLE employees (
-	id serial CONSTRAINT employee_id PRIMARY KEY,
+	id serial CONSTRAINT id PRIMARY KEY,
 	name varchar(30),
 	surname varchar(30),
 	position varchar(30),
@@ -24,7 +24,7 @@ CREATE TABLE employees (
 );
 
 CREATE TABLE workprocesses(
-	id serial CONSTRAINT workprocess_id PRIMARY KEY,
+	id serial CONSTRAINT id PRIMARY KEY,
 	description varchar(80),
 	employee int NOT NULL,
 	FOREIGN KEY (employee) REFERENCES employees (id) ON DELETE NO ACTION ON UPDATE CASCADE
