@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "workprocesses")
-@Where(clause = "isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class WorkProcess {
 
     @Id

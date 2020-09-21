@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @Entity
 @Table(name = "employees")
-@Where(clause = "isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Employee {
 
     @Id

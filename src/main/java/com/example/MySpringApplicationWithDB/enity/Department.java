@@ -15,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "departments")
-@Where(clause = "isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Department {
 
     @Id
