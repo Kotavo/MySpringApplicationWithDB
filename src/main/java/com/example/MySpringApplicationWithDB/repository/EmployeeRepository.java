@@ -1,4 +1,7 @@
 package com.example.MySpringApplicationWithDB.repository;
 
-public class EmployeeRepository {
+import com.example.MySpringApplicationWithDB.enity.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }

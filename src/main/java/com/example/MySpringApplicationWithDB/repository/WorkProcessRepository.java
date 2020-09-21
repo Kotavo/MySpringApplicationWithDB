@@ -1,4 +1,7 @@
 package com.example.MySpringApplicationWithDB.repository;
 
-public class WorkProcessRepository {
+import com.example.MySpringApplicationWithDB.enity.WorkProcess;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface WorkProcessRepository extends JpaRepository<WorkProcess,Long> {
 }

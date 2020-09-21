@@ -4,10 +4,13 @@ import com.example.MySpringApplicationWithDB.enity.Department;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class DepartmentDto {
 
     private Long id;
@@ -20,6 +23,11 @@ public class DepartmentDto {
         this.id = department.getId();
         this.name = department.getName();
         this.location = department.getLocation();
+    }
+
+    public boolean isValid(){
+       return !name.isEmpty() && !location.isEmpty();
+
     }
 
 }

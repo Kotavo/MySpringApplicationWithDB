@@ -1,4 +1,1 @@
-package com.example.MySpringApplicationWithDB.repository;
-
-public class DepartmentRepository {
-}
+package com.example.MySpringApplicationWithDB.repository;import com.example.MySpringApplicationWithDB.enity.Department;import org.springframework.data.jpa.repository.JpaRepository;import java.util.List;public interface DepartmentRepository extends JpaRepository<Department, Long> {}
