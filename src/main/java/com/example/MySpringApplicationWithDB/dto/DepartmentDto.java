@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class DepartmentDto {
 
     private Long id;

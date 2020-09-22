@@ -35,17 +35,20 @@ public class WorkProcessService {
 
     @Transactional
     @Modifying
-    public void createWorkProcess(WorkProcessDto workProcessDto) {
+    public WorkProcessDto createWorkProcess(WorkProcessDto workProcessDto) {
         if (!workProcessDto.isValid()) {
             throw new IllegalArgumentException("Department is not valid " + workProcessDto.toString());
         } else {
-            workProcessRepository.save(new WorkProcess(workProcessDto));
+            WorkProcess workProcess = new WorkProcess(workProcessDto);
+            workProcessRepository.save(workProcess);
+            workProcessDto.setId(workProcess.getId());
+            return workProcessDto;
         }
     }
 
     @Transactional
     @Modifying
-    public void updateWorkProcess(Long id, WorkProcessDto workProcessDto) throws IllegalArgumentException, NotFoundException {
+    public WorkProcessDto updateWorkProcess(Long id, WorkProcessDto workProcessDto) throws IllegalArgumentException, NotFoundException {
         WorkProcess workProcess = workProcessRepository.findById(id).orElseThrow(() -> new NotFoundException("Work Process ID=" + id + " not found"));
         if (StringUtils.isNoneBlank(workProcessDto.getDescription())) {
             workProcess.setDescription(workProcessDto.getDescription());
@@ -54,7 +57,8 @@ public class WorkProcessService {
             workProcess.setEmployee(new Employee(workProcessDto.getEmployeeDto()));
         }
         workProcessRepository.save(workProcess);
-
+        workProcessDto.setId(workProcess.getId());
+        return workProcessDto;
     }
 
     @Transactional

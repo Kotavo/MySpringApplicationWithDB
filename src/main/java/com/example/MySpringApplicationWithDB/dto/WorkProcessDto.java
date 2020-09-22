@@ -11,7 +11,6 @@ import java.beans.Transient;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class WorkProcessDto {
 
     private Long id;

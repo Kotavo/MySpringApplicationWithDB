@@ -33,18 +33,19 @@ public class DepartmentService {
     }
 
     @Transactional
-    @Modifying
-    public void createDepartment(DepartmentDto departmentDto) throws IllegalArgumentException {
+    public DepartmentDto createDepartment(DepartmentDto departmentDto) throws IllegalArgumentException {
         if (!departmentDto.isValid()) {
             throw new IllegalArgumentException("Department is not valid " + departmentDto.toString());
         } else {
-            departmentRepository.save(new Department(departmentDto));
+            Department department = new Department(departmentDto);
+            departmentRepository.save(department);
+            departmentDto.setId(department.getId());
+            return departmentDto;
         }
     }
 
     @Transactional
-    @Modifying
-    public void updateDepartment(Long id, DepartmentDto departmentDto) throws NotFoundException, IllegalArgumentException {
+    public DepartmentDto updateDepartment(Long id, DepartmentDto departmentDto) throws NotFoundException, IllegalArgumentException {
         Department department = departmentRepository.findById(id).orElseThrow(() -> new NotFoundException("Department ID=" + id + " not found"));
         if (StringUtils.isNoneBlank(departmentDto.getName())) {
             department.setName(departmentDto.getName());
@@ -56,10 +57,11 @@ public class DepartmentService {
             department.setEmployees(departmentDto.getEmployeesDto().stream().map(Employee::new).collect(Collectors.toList()));
         }*/
         departmentRepository.save(department);
+        departmentDto.setId(department.getId());
+        return departmentDto;
     }
 
     @Transactional
-    @Modifying
     public void deleteDepartment(Long id) throws NotFoundException {
         Department department = departmentRepository.findById(id).orElseThrow(() -> new NotFoundException("Department ID=" + id + " not found"));
         department.setDeleted(true);

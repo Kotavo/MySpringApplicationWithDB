@@ -4,6 +4,7 @@ import com.example.MySpringApplicationWithDB.dto.WorkProcessDto;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.service.WorkProcessService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,18 @@ public class WorkProcessController {
 
     @PostMapping("/workProcess")
     @ResponseStatus(code = HttpStatus.CREATED)
+    public ResponseEntity<?> createWorkProcess(@RequestBody WorkProcessDto workProcessDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(workProcessService.createWorkProcess(workProcessDto));
+    }
+
+    @PutMapping("/workProcess/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity<WorkProcessDto> updateWorkProcess(@PathVariable Long id, @RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(workProcessService.updateWorkProcess(id, workProcessDto));
+    }
+
+/*    @PostMapping("/workProcess")
+    @ResponseStatus(code = HttpStatus.CREATED)
     public void createWorkProcess(@RequestBody WorkProcessDto workProcessDto) {
         workProcessService.createWorkProcess(workProcessDto);
     }
@@ -41,7 +54,7 @@ public class WorkProcessController {
     @ResponseStatus(code = HttpStatus.OK)
     public void updateWorkProcess(@PathVariable Long id, @RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
         workProcessService.updateWorkProcess(id, workProcessDto);
-    }
+    }*/
 
     @DeleteMapping("/workProcess/{id}")
     @ResponseStatus(code = HttpStatus.OK)
