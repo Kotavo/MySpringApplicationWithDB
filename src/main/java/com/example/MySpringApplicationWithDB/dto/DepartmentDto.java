@@ -26,6 +26,7 @@ public class DepartmentDto {
         this.name = department.getName();
         this.location = department.getLocation();
     }
+
     @Transient
     public boolean isValid(){
        return !name.isEmpty() && !location.isEmpty();

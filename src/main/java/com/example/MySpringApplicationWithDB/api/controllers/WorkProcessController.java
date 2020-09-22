@@ -40,7 +40,7 @@ public class WorkProcessController {
 
     @PutMapping("/update/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void updateById(@PathVariable Long id, WorkProcessDto workProcessDto) throws NotFoundException {
+    public void updateById(@PathVariable Long id, @RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
         workProcessService.updateWorkProcess(id, workProcessDto);
     }
 

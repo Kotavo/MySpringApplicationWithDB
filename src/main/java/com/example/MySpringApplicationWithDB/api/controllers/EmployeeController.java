@@ -39,7 +39,7 @@ public class EmployeeController {
 
     @PutMapping("/update/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void updateById(@PathVariable Long id, EmployeeDto employeeDto) throws NotFoundException {
+    public void updateById(@PathVariable Long id, @RequestBody EmployeeDto employeeDto) throws NotFoundException {
         employeeService.updateEmployee(id, employeeDto);
     }
 
