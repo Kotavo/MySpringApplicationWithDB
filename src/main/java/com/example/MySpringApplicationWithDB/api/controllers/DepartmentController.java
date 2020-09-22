@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/department")
 public class DepartmentController {
 
     private final DepartmentService departmentService;
@@ -18,33 +17,34 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/departments")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public List<DepartmentDto> findAll(){
+    public List<DepartmentDto> getDepartments(){
         return departmentService.findAllDepartments();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("department/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public DepartmentDto findById(@PathVariable Long id) throws NotFoundException {
+    //ResponceEntity
+    public DepartmentDto getDepartment(@PathVariable Long id) throws NotFoundException {
         return departmentService.findById(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/department")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void save(@RequestBody DepartmentDto departmentDto){
+    public void createDepartment(@RequestBody DepartmentDto departmentDto){
         departmentService.saveDepartment(departmentDto);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/department/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void updateById(@PathVariable Long id, @RequestBody DepartmentDto departmentDto) throws NotFoundException {
+    public void updateDepartment(@PathVariable Long id, @RequestBody DepartmentDto departmentDto) throws NotFoundException {
         departmentService.updateDepartment(id, departmentDto);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/department/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void deleteById(@RequestBody Long id) throws NotFoundException {
+    public void deleteDepartment(@PathVariable Long id) throws NotFoundException {
         departmentService.deleteDepartment(id);
     }
 }

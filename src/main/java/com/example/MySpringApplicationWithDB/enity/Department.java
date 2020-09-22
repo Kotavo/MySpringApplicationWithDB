@@ -25,7 +25,7 @@ public class Department {
     private String name;
 
     private String location;
-
+    //manyToOne
     private boolean isDeleted = false;
 
     public Department(DepartmentDto departmentDto) {
