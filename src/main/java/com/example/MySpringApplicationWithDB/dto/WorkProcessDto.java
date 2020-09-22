@@ -18,17 +18,18 @@ public class WorkProcessDto {
 
     private String description;
 
-    private Long employee;
+    private EmployeeDto employeeDto;
+
 
     public WorkProcessDto(WorkProcess workProcess){
         this.id = workProcess.getId();
         this.description = workProcess.getDescription();
-        this.employee = workProcess.getEmployee();
+        this.employeeDto = new EmployeeDto(workProcess.getEmployee());
     }
 
     @Transient
     public boolean isValid(){
-        return !description.isEmpty() && employee != null;
+        return !description.isEmpty() && employeeDto != null;
     }
 
 }

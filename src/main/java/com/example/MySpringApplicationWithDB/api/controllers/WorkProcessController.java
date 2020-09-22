@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/WorkProcess")
 public class WorkProcessController {
 
     private final WorkProcessService workProcessService;
@@ -19,34 +18,34 @@ public class WorkProcessController {
         this.workProcessService = workProcessService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/workProcesses")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public List<WorkProcessDto> findAll() {
-        return workProcessService.findAllWorkProcess();
+    public List<WorkProcessDto> getWorkProcesses() {
+        return workProcessService.findAllWorkProcesses();
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("workProcess/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public WorkProcessDto findById(@PathVariable Long id) throws NotFoundException {
-        return workProcessService.findById(id);
+    public WorkProcessDto getWorkProcess(@PathVariable Long id) throws NotFoundException {
+        return workProcessService.findWorkProcessById(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/workProcess")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void save(@RequestBody WorkProcessDto workProcessDto) {
-        workProcessService.saveWorkProcess(workProcessDto);
+    public void createWorkProcess(@RequestBody WorkProcessDto workProcessDto) {
+        workProcessService.createWorkProcess(workProcessDto);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/workProcess/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void updateById(@PathVariable Long id, @RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
+    public void updateWorkProcess(@PathVariable Long id, @RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
         workProcessService.updateWorkProcess(id, workProcessDto);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/workProcess/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void deleteById(@RequestBody Long id) throws NotFoundException {
+    public void deleteWorkProcess(@PathVariable Long id) throws NotFoundException {
         workProcessService.deleteWorkProcess(id);
     }
 }

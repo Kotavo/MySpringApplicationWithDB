@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "workprocesses")
-@Where(clause = "is_deleted = false")
+@Where(clause = "deleted = false")
 public class WorkProcess {
 
     @Id
@@ -22,13 +22,14 @@ public class WorkProcess {
 
     private String description;
 
-    private Long employee;
+    @OneToOne(optional = false, mappedBy = "workProcess")
+    private Employee employee;
 
-    private boolean isDeleted = false;
+    private boolean deleted = false;
 
     public WorkProcess(WorkProcessDto workProcessDto){
         this.description = workProcessDto.getDescription();
-        this.employee = workProcessDto.getEmployee();
+        this.employee = new Employee(workProcessDto.getEmployeeDto());
     }
 
 

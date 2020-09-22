@@ -24,7 +24,7 @@ public class EmployeeDto {
 
     private String mail;
 
-    private Long department;
+    private DepartmentDto departmentDto;  // ? Department department ?
 
     public EmployeeDto(Employee employee) {
         this.id = employee.getId();
@@ -32,16 +32,14 @@ public class EmployeeDto {
         this.surname = employee.getSurname();
         this.position = employee.getPosition();
         this.mail = employee.getMail();
-        this.department = employee.getDepartment();
+        this.departmentDto = new DepartmentDto(employee.getDepartment());
     }
 
     @Transient
     public boolean isValid() {
         return !name.isEmpty() &&
-               !surname.isEmpty() &&
                !position.isEmpty() &&
-               !mail.isEmpty() &&
-               department != null;
+               departmentDto != null;
 
     }
 }

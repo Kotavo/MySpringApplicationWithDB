@@ -27,13 +27,13 @@ public class DepartmentController {
     @ResponseStatus(code = HttpStatus.FOUND)
     //ResponceEntity
     public DepartmentDto getDepartment(@PathVariable Long id) throws NotFoundException {
-        return departmentService.findById(id);
+        return departmentService.findDepartmentById(id);
     }
 
     @PostMapping("/department")
     @ResponseStatus(code = HttpStatus.CREATED)
     public void createDepartment(@RequestBody DepartmentDto departmentDto){
-        departmentService.saveDepartment(departmentDto);
+        departmentService.createDepartment(departmentDto);
     }
 
     @PutMapping("/department/{id}")

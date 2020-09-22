@@ -2,8 +2,10 @@ package com.example.MySpringApplicationWithDB.service;
 
 import com.example.MySpringApplicationWithDB.dto.DepartmentDto;
 import com.example.MySpringApplicationWithDB.enity.Department;
+import com.example.MySpringApplicationWithDB.enity.Employee;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.repository.DepartmentRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,18 +27,14 @@ public class DepartmentService {
         return departmentRepository.findAll().stream().map(DepartmentDto::new).collect(Collectors.toList());
     }
 
-    public DepartmentDto findById(Long id) throws NotFoundException {
-        Optional<Department> department = departmentRepository.findById(id);
-        if (department.isPresent()) {
-            return new DepartmentDto(department.get());
-        } else {
-            throw new NotFoundException("Department ID=" + id + " not found");
-        }
+    public DepartmentDto findDepartmentById(Long id) throws NotFoundException {
+        Department department = departmentRepository.findById(id).orElseThrow(() -> new NotFoundException("Department ID=" + id + " not found"));
+        return new DepartmentDto(department);
     }
 
     @Transactional
     @Modifying
-    public void saveDepartment(DepartmentDto departmentDto) throws IllegalArgumentException {
+    public void createDepartment(DepartmentDto departmentDto) throws IllegalArgumentException {
         if (!departmentDto.isValid()) {
             throw new IllegalArgumentException("Department is not valid " + departmentDto.toString());
         } else {
@@ -47,29 +45,24 @@ public class DepartmentService {
     @Transactional
     @Modifying
     public void updateDepartment(Long id, DepartmentDto departmentDto) throws NotFoundException, IllegalArgumentException {
-        Optional<Department> department = departmentRepository.findById(id);
-        if (department.isEmpty()) {
-            throw new NotFoundException("Department ID=" + id + " not found");
+        Department department = departmentRepository.findById(id).orElseThrow(() -> new NotFoundException("Department ID=" + id + " not found"));
+        if (StringUtils.isNoneBlank(departmentDto.getName())) {
+            department.setName(departmentDto.getName());
         }
-        if(!departmentDto.isValid()){
-            throw new IllegalArgumentException("Department is not valid " + departmentDto.toString());
+        if (StringUtils.isNoneBlank(departmentDto.getLocation())) {
+            department.setLocation(departmentDto.getLocation());
         }
-        else {
-            Department departmentToSave = new Department(id, departmentDto.getName(), departmentDto.getLocation(), false);
-            departmentRepository.save(departmentToSave);
-        }
+/*        if(!departmentDto.getEmployeesDto().isEmpty()){
+            department.setEmployees(departmentDto.getEmployeesDto().stream().map(Employee::new).collect(Collectors.toList()));
+        }*/
+        departmentRepository.save(department);
     }
 
     @Transactional
     @Modifying
     public void deleteDepartment(Long id) throws NotFoundException {
-        Optional<Department> department = departmentRepository.findById(id);
-        if (department.isEmpty()) {
-            throw new NotFoundException("Department ID=" + id + " not found");
-        } else {
-            Department departmentToSave = department.get();
-            departmentToSave.setDeleted(true);
-            departmentRepository.save(departmentToSave);
-        }
+        Department department = departmentRepository.findById(id).orElseThrow(() -> new NotFoundException("Department ID=" + id + " not found"));
+        department.setDeleted(true);
+        departmentRepository.save(department);
     }
 }

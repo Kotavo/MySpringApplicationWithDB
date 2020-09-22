@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @Entity
 @Table(name = "employees")
-@Where(clause = "is_deleted = false")
+@Where(clause = "deleted = false")
 public class Employee {
 
     @Id
@@ -31,16 +31,22 @@ public class Employee {
 
     private String mail;
 
-    private Long department;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
-    private boolean isDeleted = false;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "work_process_id")
+    private WorkProcess workProcess;
+
+    private boolean deleted = false;
 
     public Employee(EmployeeDto employeeDto) {
         this.name = employeeDto.getName();
         this.surname = employeeDto.getSurname();
         this.position = employeeDto.getPosition();
         this.mail = employeeDto.getMail();
-        this.department = employeeDto.getDepartment();
+        this.department = new Department(employeeDto.getDepartmentDto());
     }
 
 

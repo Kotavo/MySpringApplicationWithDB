@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -18,34 +17,34 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/employees")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public List<EmployeeDto> findAll(){
-        return employeeService.findAllEmployee();
+    public List<EmployeeDto> getEmployees(){
+        return employeeService.findAllEmployees();
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("employee/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public EmployeeDto findById(@PathVariable Long id) throws NotFoundException {
-        return employeeService.findById(id);
+    public EmployeeDto getEmployee(@PathVariable Long id) throws NotFoundException {
+        return employeeService.findEmployeeById(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/employee")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void save(@RequestBody EmployeeDto employeeDto){
-        employeeService.saveEmployee(employeeDto);
+    public void createEmployee(@RequestBody EmployeeDto employeeDto){
+        employeeService.createEmployee(employeeDto);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/employee/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void updateById(@PathVariable Long id, @RequestBody EmployeeDto employeeDto) throws NotFoundException {
+    public void updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto employeeDto) throws NotFoundException {
         employeeService.updateEmployee(id, employeeDto);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/employee/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void deleteById(@RequestBody Long id) throws NotFoundException {
+    public void deleteEmployee(@PathVariable Long id) throws NotFoundException {
         employeeService.deleteEmployee(id);
     }
 

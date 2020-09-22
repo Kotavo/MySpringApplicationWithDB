@@ -1,9 +1,11 @@
 package com.example.MySpringApplicationWithDB.service;
 
 import com.example.MySpringApplicationWithDB.dto.WorkProcessDto;
+import com.example.MySpringApplicationWithDB.enity.Employee;
 import com.example.MySpringApplicationWithDB.enity.WorkProcess;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.repository.WorkProcessRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,22 +24,18 @@ public class WorkProcessService {
         this.workProcessRepository = workProcessRepository;
     }
 
-    public List<WorkProcessDto> findAllWorkProcess() {
+    public List<WorkProcessDto> findAllWorkProcesses() {
         return workProcessRepository.findAll().stream().map(WorkProcessDto::new).collect(Collectors.toList());
     }
 
-    public WorkProcessDto findById(Long id) throws NotFoundException {
-        Optional<WorkProcess> workProcess = workProcessRepository.findById(id);
-        if (workProcess.isPresent()) {
-            return new WorkProcessDto(workProcess.get());
-        } else {
-            throw new NotFoundException("Work Process ID=" + id + " not found");
-        }
+    public WorkProcessDto findWorkProcessById(Long id) throws NotFoundException {
+        WorkProcess workProcess = workProcessRepository.findById(id).orElseThrow(() -> new NotFoundException("Work Process ID=" + id + " not found"));
+        return new WorkProcessDto(workProcess);
     }
 
     @Transactional
     @Modifying
-    public void saveWorkProcess(WorkProcessDto workProcessDto) {
+    public void createWorkProcess(WorkProcessDto workProcessDto) {
         if (!workProcessDto.isValid()) {
             throw new IllegalArgumentException("Department is not valid " + workProcessDto.toString());
         } else {
@@ -48,28 +46,22 @@ public class WorkProcessService {
     @Transactional
     @Modifying
     public void updateWorkProcess(Long id, WorkProcessDto workProcessDto) throws IllegalArgumentException, NotFoundException {
-        Optional<WorkProcess> workProcess = workProcessRepository.findById(id);
-        if (workProcess.isEmpty()) {
-            throw new NotFoundException("Work Process ID=" + id + " not found");
+        WorkProcess workProcess = workProcessRepository.findById(id).orElseThrow(() -> new NotFoundException("Work Process ID=" + id + " not found"));
+        if (StringUtils.isNoneBlank(workProcessDto.getDescription())) {
+            workProcess.setDescription(workProcessDto.getDescription());
         }
-        if (!workProcessDto.isValid()) {
-            throw new IllegalArgumentException("Department is not valid " + workProcessDto.toString());
-        } else {
-            workProcessRepository.save(new WorkProcess(id, workProcessDto.getDescription(), workProcessDto.getEmployee(), false));
+        if (workProcessDto.getEmployeeDto() != null) {
+            workProcess.setEmployee(new Employee(workProcessDto.getEmployeeDto()));
         }
+        workProcessRepository.save(workProcess);
+
     }
 
     @Transactional
     @Modifying
     public void deleteWorkProcess(Long id) throws NotFoundException {
-        Optional<WorkProcess> workProcess = workProcessRepository.findById(id);
-        if (workProcess.isEmpty()) {
-            throw new NotFoundException("Work Process ID=" + id + " not found");
-        } else {
-            WorkProcess workProcessToSave = workProcess.get();
-            workProcessToSave.setDeleted(true);
-            workProcessRepository.save(workProcessToSave);
-        }
+        WorkProcess workProcess = workProcessRepository.findById(id).orElseThrow(() -> new NotFoundException("Work Process ID=" + id + " not found"));
+        workProcess.setDeleted(true);
+        workProcessRepository.save(workProcess);
     }
-
 }

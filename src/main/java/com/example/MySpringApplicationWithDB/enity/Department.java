@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Data
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "departments")
-@Where(clause = "is_deleted = false")
+@Where(clause = "deleted = false")
 public class Department {
 
     @Id
@@ -25,13 +26,15 @@ public class Department {
     private String name;
 
     private String location;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    private List<Employee> employees;
     //manyToOne
-    private boolean isDeleted = false;
+    private boolean deleted = false;
 
     public Department(DepartmentDto departmentDto) {
         this.name = departmentDto.getName();
         this.location = departmentDto.getLocation();
-
     }
 
 }
