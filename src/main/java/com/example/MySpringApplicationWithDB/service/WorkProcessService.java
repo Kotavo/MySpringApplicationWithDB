@@ -34,7 +34,6 @@ public class WorkProcessService {
     }
 
     @Transactional
-    @Modifying
     public WorkProcessDto createWorkProcess(WorkProcessDto workProcessDto) {
         if (!workProcessDto.isValid()) {
             throw new IllegalArgumentException("Department is not valid " + workProcessDto.toString());
@@ -47,7 +46,6 @@ public class WorkProcessService {
     }
 
     @Transactional
-    @Modifying
     public WorkProcessDto updateWorkProcess(Long id, WorkProcessDto workProcessDto) throws IllegalArgumentException, NotFoundException {
         WorkProcess workProcess = workProcessRepository.findById(id).orElseThrow(() -> new NotFoundException("Work Process ID=" + id + " not found"));
         if (StringUtils.isNoneBlank(workProcessDto.getDescription())) {
@@ -62,7 +60,6 @@ public class WorkProcessService {
     }
 
     @Transactional
-    @Modifying
     public void deleteWorkProcess(Long id) throws NotFoundException {
         WorkProcess workProcess = workProcessRepository.findById(id).orElseThrow(() -> new NotFoundException("Work Process ID=" + id + " not found"));
         workProcess.setDeleted(true);

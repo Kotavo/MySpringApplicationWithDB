@@ -33,12 +33,12 @@ public class EmployeeService {
     }
 
     @Transactional
-    @Modifying
     public EmployeeDto createEmployee(EmployeeDto employeeDto) throws IllegalArgumentException {
         if (!employeeDto.isValid()) {
             throw new IllegalArgumentException("Employee is not valid " + employeeDto.toString());
         } else {
             Employee employee = new Employee(employeeDto);
+            employee.setDepartment(new Department(employeeDto.getDepartmentDto()));
             employeeRepository.save(employee);
             employeeDto.setId(employee.getId());
             return employeeDto;
@@ -46,7 +46,6 @@ public class EmployeeService {
     }
 
     @Transactional
-    @Modifying
     public EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto) throws NotFoundException, IllegalArgumentException {
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new NotFoundException("Employee ID=" + id + " not found"));
         if (StringUtils.isNoneBlank(employeeDto.getName())) {

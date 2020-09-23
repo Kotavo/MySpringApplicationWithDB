@@ -46,7 +46,7 @@ public class Employee {
         this.surname = employeeDto.getSurname();
         this.position = employeeDto.getPosition();
         this.mail = employeeDto.getMail();
-        this.department = new Department(employeeDto.getDepartmentDto());
+     //   this.department = new Department(employeeDto.getDepartmentDto());
     }
 
 
