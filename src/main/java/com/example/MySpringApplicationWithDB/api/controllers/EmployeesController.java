@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class EmployeeController {
+public class EmployeesController {
 
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeesController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
@@ -32,7 +32,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employee")
-    public ResponseEntity<?> createEmployee(@RequestBody EmployeeDto employeeDto) {
+    public ResponseEntity<?> createEmployee(@RequestBody EmployeeDto employeeDto) throws NotFoundException {
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employeeDto));
     }
 

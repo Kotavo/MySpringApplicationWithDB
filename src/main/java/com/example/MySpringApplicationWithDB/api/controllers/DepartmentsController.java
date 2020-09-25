@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class DepartmentController {
+public class DepartmentsController {
 
     private final DepartmentService departmentService;
 
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentsController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 

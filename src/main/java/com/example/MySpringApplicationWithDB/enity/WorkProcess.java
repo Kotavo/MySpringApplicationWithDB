@@ -22,7 +22,9 @@ public class WorkProcess {
 
     private String description;
 
-    @OneToOne(optional = false, mappedBy = "workProcess")
+ //   @OneToOne(optional = false, mappedBy = "workProcess")
+    @OneToOne(optional = false)
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     private boolean deleted = false;

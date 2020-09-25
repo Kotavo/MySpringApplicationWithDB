@@ -35,8 +35,9 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "work_process_id")
+ //   @OneToOne(optional = false)
+ //   @JoinColumn(name = "work_process_id")
+    @OneToOne(optional = false, mappedBy = "employee")
     private WorkProcess workProcess;
 
     private boolean deleted = false;

@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class WorkProcessController {
+public class WorkProcessesController {
 
     private final WorkProcessService workProcessService;
 
 
-    public WorkProcessController(WorkProcessService workProcessService) {
+    public WorkProcessesController(WorkProcessService workProcessService) {
         this.workProcessService = workProcessService;
     }
 

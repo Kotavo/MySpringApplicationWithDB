@@ -4,6 +4,7 @@ import com.example.MySpringApplicationWithDB.dto.EmployeeDto;
 import com.example.MySpringApplicationWithDB.enity.Department;
 import com.example.MySpringApplicationWithDB.enity.Employee;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
+import com.example.MySpringApplicationWithDB.repository.DepartmentRepository;
 import com.example.MySpringApplicationWithDB.repository.EmployeeRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,9 +17,11 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeService {
 
+    private final DepartmentRepository departmentRepository;
     private final EmployeeRepository employeeRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
+        this.departmentRepository = departmentRepository;
         this.employeeRepository = employeeRepository;
     }
 
@@ -33,12 +36,13 @@ public class EmployeeService {
     }
 
     @Transactional
-    public EmployeeDto createEmployee(EmployeeDto employeeDto) throws IllegalArgumentException {
+    public EmployeeDto createEmployee(EmployeeDto employeeDto) throws IllegalArgumentException, NotFoundException {
         if (!employeeDto.isValid()) {
             throw new IllegalArgumentException("Employee is not valid " + employeeDto.toString());
         } else {
             Employee employee = new Employee(employeeDto);
-            employee.setDepartment(new Department(employeeDto.getDepartmentDto()));
+            Department department = departmentRepository.findById(employeeDto.getDepartmentDto().getId()).orElseThrow(() -> new NotFoundException("dfd"));
+            employee.setDepartment(department);
             employeeRepository.save(employee);
             employeeDto.setId(employee.getId());
             return employeeDto;
