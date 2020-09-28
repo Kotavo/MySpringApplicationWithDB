@@ -38,7 +38,7 @@ public class EmployeesController {
 
     @PutMapping("/employee/{id}")
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto employeeDto) throws NotFoundException {
-      return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(id, employeeDto));
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(id, employeeDto));
     }
 
 

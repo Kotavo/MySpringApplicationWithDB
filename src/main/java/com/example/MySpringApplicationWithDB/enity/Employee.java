@@ -2,10 +2,7 @@ package com.example.MySpringApplicationWithDB.enity;
 
 
 import com.example.MySpringApplicationWithDB.dto.EmployeeDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -14,6 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+//@ToString(exclude = {"department", "workProcess"})
+@ToString(exclude = "department")
 @Entity
 @Table(name = "employees")
 @Where(clause = "deleted = false")
@@ -31,13 +30,11 @@ public class Employee {
 
     private String mail;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
 
- //   @OneToOne(optional = false)
- //   @JoinColumn(name = "work_process_id")
-    @OneToOne(optional = false, mappedBy = "employee")
+    @OneToOne(optional = true, mappedBy = "employee")
     private WorkProcess workProcess;
 
     private boolean deleted = false;
@@ -47,7 +44,8 @@ public class Employee {
         this.surname = employeeDto.getSurname();
         this.position = employeeDto.getPosition();
         this.mail = employeeDto.getMail();
-     //   this.department = new Department(employeeDto.getDepartmentDto());
+        //      this.department = new Department(employeeDto.getDepartmentDto()); // ?????? или в сервисе findId ?
+
     }
 
 

@@ -34,7 +34,7 @@ public class WorkProcessesController {
 
     @PostMapping("/workProcess")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<?> createWorkProcess(@RequestBody WorkProcessDto workProcessDto) {
+    public ResponseEntity<?> createWorkProcess(@RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
         return ResponseEntity.status(HttpStatus.CREATED).body(workProcessService.createWorkProcess(workProcessDto));
     }
 

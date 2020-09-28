@@ -4,7 +4,6 @@ import com.example.MySpringApplicationWithDB.enity.WorkProcess;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.beans.Transient;
 
@@ -19,16 +18,15 @@ public class WorkProcessDto {
 
     private EmployeeDto employeeDto;
 
-
-    public WorkProcessDto(WorkProcess workProcess){
+    public WorkProcessDto(WorkProcess workProcess) {
         this.id = workProcess.getId();
         this.description = workProcess.getDescription();
         this.employeeDto = new EmployeeDto(workProcess.getEmployee());
     }
 
     @Transient
-    public boolean isValid(){
-        return !description.isEmpty() && employeeDto != null;
+    public boolean isValid() {
+        return !description.isEmpty() && employeeDto.getId() != null;
     }
 
 }

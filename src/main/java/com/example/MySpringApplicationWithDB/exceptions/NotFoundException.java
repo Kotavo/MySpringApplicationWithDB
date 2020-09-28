@@ -2,7 +2,7 @@ package com.example.MySpringApplicationWithDB.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public class NotFoundException extends Exception{
+public class NotFoundException extends Exception {
 
     public NotFoundException(String message) {
         super(message);
@@ -13,7 +13,7 @@ public class NotFoundException extends Exception{
         return super.getMessage();
     }
 
-    public HttpStatus getStatus(){
+    public HttpStatus getStatus() {
         return HttpStatus.NOT_FOUND;
     }
 }

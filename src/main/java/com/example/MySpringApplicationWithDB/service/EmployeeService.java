@@ -64,8 +64,9 @@ public class EmployeeService {
         if (StringUtils.isNoneBlank(employeeDto.getMail())) {
             employee.setName(employeeDto.getMail());
         }
-        if (employeeDto.getDepartmentDto() != null) {
-            employee.setDepartment(new Department(employeeDto.getDepartmentDto()));
+        if (employeeDto.getDepartmentDto().getId() != null) {
+            Department department = departmentRepository.findById(employeeDto.getDepartmentDto().getId()).orElseThrow(() -> new NotFoundException("dfd"));
+            employee.setDepartment(department);
         }
         employeeRepository.save(employee);
         employeeDto.setId(employee.getId());

@@ -4,6 +4,7 @@ import com.example.MySpringApplicationWithDB.dto.WorkProcessDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -15,6 +16,15 @@ import javax.persistence.*;
 @Table(name = "workprocesses")
 @Where(clause = "deleted = false")
 public class WorkProcess {
+    @Override
+    public String toString() {
+        return "WorkProcess{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", employee=" + employee.getId() +
+                ", deleted=" + deleted +
+                '}';
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +32,16 @@ public class WorkProcess {
 
     private String description;
 
- //   @OneToOne(optional = false, mappedBy = "workProcess")
-    @OneToOne(optional = false)
+
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
     private boolean deleted = false;
 
-    public WorkProcess(WorkProcessDto workProcessDto){
+    public WorkProcess(WorkProcessDto workProcessDto) {
         this.description = workProcessDto.getDescription();
-        this.employee = new Employee(workProcessDto.getEmployeeDto());
+        //     this.employee = new Employee(workProcessDto.getEmployeeDto());
     }
 
 

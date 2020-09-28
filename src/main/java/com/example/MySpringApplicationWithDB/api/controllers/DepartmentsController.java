@@ -20,7 +20,7 @@ public class DepartmentsController {
 
     @GetMapping("/departments")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public List<DepartmentDto> getDepartments(){
+    public List<DepartmentDto> getDepartments() {
         return departmentService.findAllDepartments();
     }
 
@@ -36,15 +36,14 @@ public class DepartmentsController {
     }*/
 
 
-
     @PostMapping("/department")
-    public ResponseEntity<?> createDepartment(@RequestBody DepartmentDto departmentDto){
+    public ResponseEntity<?> createDepartment(@RequestBody DepartmentDto departmentDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(departmentService.createDepartment(departmentDto));
     }
 
     @PutMapping("/department/{id}")
     public ResponseEntity<DepartmentDto> updateDepartment(@PathVariable Long id, @RequestBody DepartmentDto departmentDto) throws NotFoundException {
-      return ResponseEntity.status(HttpStatus.OK).body(departmentService.updateDepartment(id, departmentDto));
+        return ResponseEntity.status(HttpStatus.OK).body(departmentService.updateDepartment(id, departmentDto));
     }
 
 //    @PutMapping("/department/{id}")
