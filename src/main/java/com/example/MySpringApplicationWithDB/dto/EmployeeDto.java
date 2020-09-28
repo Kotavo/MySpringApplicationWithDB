@@ -24,7 +24,7 @@ public class EmployeeDto {
 
     private DepartmentDto departmentDto;  // ? Department department ?
 
-//    private WorkProcessDto workProcessDto;
+    private WorkProcessDto workProcessDto;
 
     public EmployeeDto(Employee employee) {
         this.id = employee.getId();
@@ -33,7 +33,7 @@ public class EmployeeDto {
         this.position = employee.getPosition();
         this.mail = employee.getMail();
         this.departmentDto = new DepartmentDto(employee.getDepartment());
-        //     this.workProcessDto = new WorkProcessDto(employee.getWorkProcess());
+    //    this.workProcessDto = new WorkProcessDto(employee.getWorkProcess());
     }
 
     @Transient

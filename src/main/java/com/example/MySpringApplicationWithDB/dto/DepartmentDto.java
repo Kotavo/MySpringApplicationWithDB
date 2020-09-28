@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.beans.Transient;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -18,13 +20,13 @@ public class DepartmentDto {
 
     private String location;
 
- //   private List<EmployeeDto> employeesDto;
+    private List<EmployeeDto> employeesDto;
 
     public DepartmentDto(Department department) {
         this.id = department.getId();
         this.name = department.getName();
         this.location = department.getLocation();
-   //     this.employeesDto = department.getEmployees().stream().map(EmployeeDto::new).collect(Collectors.toList());
+  //      this.employeesDto = department.getEmployees().stream().map(EmployeeDto::new).collect(Collectors.toList());
     }
 
     @Transient
