@@ -1,7 +1,6 @@
 package com.example.MySpringApplicationWithDB.enity;
 
 
-import com.example.MySpringApplicationWithDB.dto.DepartmentDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,12 +28,6 @@ public class Department {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     private List<Employee> employees;
-    //manyToOne
+
     private boolean deleted = false;
-
-    public Department(DepartmentDto departmentDto) {
-        this.name = departmentDto.getName();
-        this.location = departmentDto.getLocation();
-    }
-
 }

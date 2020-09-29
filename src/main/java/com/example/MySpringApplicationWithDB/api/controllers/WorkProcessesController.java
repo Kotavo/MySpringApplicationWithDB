@@ -3,6 +3,7 @@ package com.example.MySpringApplicationWithDB.api.controllers;
 import com.example.MySpringApplicationWithDB.dto.WorkProcessDto;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.service.WorkProcessService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class WorkProcessesController {
 
     private final WorkProcessService workProcessService;
-
-
-    public WorkProcessesController(WorkProcessService workProcessService) {
-        this.workProcessService = workProcessService;
-    }
 
     @GetMapping("/workProcesses")
     @ResponseStatus(code = HttpStatus.FOUND)
@@ -34,7 +31,7 @@ public class WorkProcessesController {
 
     @PostMapping("/workProcess")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<?> createWorkProcess(@RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
+    public ResponseEntity<?> createWorkProcess(@RequestBody WorkProcessDto workProcessDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(workProcessService.createWorkProcess(workProcessDto));
     }
 
@@ -43,18 +40,6 @@ public class WorkProcessesController {
     public ResponseEntity<WorkProcessDto> updateWorkProcess(@PathVariable Long id, @RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(workProcessService.updateWorkProcess(id, workProcessDto));
     }
-
-/*    @PostMapping("/workProcess")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public void createWorkProcess(@RequestBody WorkProcessDto workProcessDto) {
-        workProcessService.createWorkProcess(workProcessDto);
-    }
-
-    @PutMapping("/workProcess/{id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public void updateWorkProcess(@PathVariable Long id, @RequestBody WorkProcessDto workProcessDto) throws NotFoundException {
-        workProcessService.updateWorkProcess(id, workProcessDto);
-    }*/
 
     @DeleteMapping("/workProcess/{id}")
     @ResponseStatus(code = HttpStatus.OK)
