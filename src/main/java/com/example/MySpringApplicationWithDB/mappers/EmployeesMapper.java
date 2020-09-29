@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(uses = {DepartmentsMapper.class, WorkProcessesMapper.class})
 public interface EmployeesMapper {
 
-    EmployeesMapper EMPLOYEES_MAPPER = Mappers.getMapper(EmployeesMapper.class);
+ //   EmployeesMapper EMPLOYEES_MAPPER = Mappers.getMapper(EmployeesMapper.class);
 
     @Mapping(target = "departmentDto", source = "department")
     @Mapping(target = "workProcessDto", source = "workProcess", ignore = true)

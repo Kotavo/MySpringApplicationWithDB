@@ -21,19 +21,20 @@ public class WorkProcessService {
 
     private final WorkProcessRepository workProcessRepository;
     private final EmployeeRepository employeeRepository;
+    private final WorkProcessesMapper workProcessesMapper;
 
     public List<WorkProcessDto> findAllWorkProcesses() {
-        return workProcessRepository.findAll().stream().map(WorkProcessesMapper.WORK_PROCESSES_MAPPER::fromWorkProcess).collect(Collectors.toList());
+        return workProcessRepository.findAll().stream().map(workProcessesMapper::fromWorkProcess).collect(Collectors.toList());
     }
 
     public WorkProcessDto findWorkProcessById(Long id) throws NotFoundException {
         WorkProcess workProcess = workProcessRepository.findById(id).orElseThrow(() -> new NotFoundException("Work Process ID=" + id + " not found"));
-        return WorkProcessesMapper.WORK_PROCESSES_MAPPER.fromWorkProcess(workProcess);
+        return workProcessesMapper.fromWorkProcess(workProcess);
     }
 
     @Transactional
     public WorkProcessDto createWorkProcess(WorkProcessDto workProcessDto) {
-        WorkProcess workProcess = WorkProcessesMapper.WORK_PROCESSES_MAPPER.toWorkProcess(workProcessDto);
+        WorkProcess workProcess = workProcessesMapper.toWorkProcess(workProcessDto);
         workProcessRepository.save(workProcess);
         workProcessDto.setId(workProcessDto.getId());
         return workProcessDto;

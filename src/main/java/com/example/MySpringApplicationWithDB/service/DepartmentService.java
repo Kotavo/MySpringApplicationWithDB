@@ -18,19 +18,20 @@ import java.util.stream.Collectors;
 public class DepartmentService {
 
     private final DepartmentRepository departmentRepository;
+    private final DepartmentsMapper departmentsMapper;
 
     public List<DepartmentDto> findAllDepartments() {
-        return departmentRepository.findAll().stream().map(DepartmentsMapper.DEPARTMENTS_MAPPER::fromDepartment).collect(Collectors.toList());
+        return departmentRepository.findAll().stream().map(departmentsMapper::fromDepartment).collect(Collectors.toList());
     }
 
     public DepartmentDto findDepartmentById(Long id) throws NotFoundException {
         Department department = departmentRepository.findById(id).orElseThrow(() -> new NotFoundException("Department ID=" + id + " not found"));
-        return DepartmentsMapper.DEPARTMENTS_MAPPER.fromDepartment(department);
+        return departmentsMapper.fromDepartment(department);
     }
 
     @Transactional
     public DepartmentDto createDepartment(DepartmentDto departmentDto) {
-        Department department = DepartmentsMapper.DEPARTMENTS_MAPPER.toDepartment(departmentDto);
+        Department department = departmentsMapper.toDepartment(departmentDto);
         departmentRepository.save(department);
         departmentDto.setId(department.getId());
         return departmentDto;

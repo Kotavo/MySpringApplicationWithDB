@@ -7,9 +7,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+
 @Mapper(uses = EmployeesMapper.class)
 public interface DepartmentsMapper {
-    DepartmentsMapper DEPARTMENTS_MAPPER = Mappers.getMapper(DepartmentsMapper.class);
+  //  DepartmentsMapper DEPARTMENTS_MAPPER = Mappers.getMapper(DepartmentsMapper.class);
 
     @Mapping(target = "employeesDto", source = "employees", ignore = true)
     DepartmentDto fromDepartment(Department department);

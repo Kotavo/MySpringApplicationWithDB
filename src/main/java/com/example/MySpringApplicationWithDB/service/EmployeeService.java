@@ -21,20 +21,21 @@ public class EmployeeService {
 
     private final DepartmentRepository departmentRepository;
     private final EmployeeRepository employeeRepository;
+    private final EmployeesMapper employeesMapper;
 
     public List<EmployeeDto> findAllEmployees() {
-        return employeeRepository.findAll().stream().map(EmployeesMapper.EMPLOYEES_MAPPER::fromEmployee).collect(Collectors.toList());
+        return employeeRepository.findAll().stream().map(employeesMapper::fromEmployee).collect(Collectors.toList());
     }
 
     public EmployeeDto findEmployeeById(Long id) throws NotFoundException {
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new NotFoundException("Employee ID=" + id + " not found"));
-        return EmployeesMapper.EMPLOYEES_MAPPER.fromEmployee(employee);
+        return employeesMapper.fromEmployee(employee);
 
     }
 
     @Transactional
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
-        Employee employee = EmployeesMapper.EMPLOYEES_MAPPER.toEmployee(employeeDto);
+        Employee employee = employeesMapper.toEmployee(employeeDto);
         employeeRepository.save(employee);
         employeeDto.setId(employee.getId());
         return employeeDto;
