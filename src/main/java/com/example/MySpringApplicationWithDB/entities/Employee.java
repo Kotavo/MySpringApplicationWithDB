@@ -1,4 +1,4 @@
-package com.example.MySpringApplicationWithDB.enity;
+package com.example.MySpringApplicationWithDB.entities;
 
 
 import lombok.*;

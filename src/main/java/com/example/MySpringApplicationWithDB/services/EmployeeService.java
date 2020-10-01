@@ -1,12 +1,12 @@
-package com.example.MySpringApplicationWithDB.service;
+package com.example.MySpringApplicationWithDB.services;
 
 import com.example.MySpringApplicationWithDB.dto.EmployeeDto;
-import com.example.MySpringApplicationWithDB.enity.Department;
-import com.example.MySpringApplicationWithDB.enity.Employee;
+import com.example.MySpringApplicationWithDB.entities.Department;
+import com.example.MySpringApplicationWithDB.entities.Employee;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.mappers.EmployeesMapper;
-import com.example.MySpringApplicationWithDB.repository.DepartmentRepository;
-import com.example.MySpringApplicationWithDB.repository.EmployeeRepository;
+import com.example.MySpringApplicationWithDB.repositories.DepartmentRepository;
+import com.example.MySpringApplicationWithDB.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.example.MySpringApplicationWithDB.mappers;
 
 import com.example.MySpringApplicationWithDB.dto.WorkProcessDto;
-import com.example.MySpringApplicationWithDB.enity.WorkProcess;
+import com.example.MySpringApplicationWithDB.entities.WorkProcess;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

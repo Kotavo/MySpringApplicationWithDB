@@ -1,12 +1,12 @@
-package com.example.MySpringApplicationWithDB.service;
+package com.example.MySpringApplicationWithDB.services;
 
 import com.example.MySpringApplicationWithDB.dto.WorkProcessDto;
-import com.example.MySpringApplicationWithDB.enity.Employee;
-import com.example.MySpringApplicationWithDB.enity.WorkProcess;
+import com.example.MySpringApplicationWithDB.entities.Employee;
+import com.example.MySpringApplicationWithDB.entities.WorkProcess;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.mappers.WorkProcessesMapper;
-import com.example.MySpringApplicationWithDB.repository.EmployeeRepository;
-import com.example.MySpringApplicationWithDB.repository.WorkProcessRepository;
+import com.example.MySpringApplicationWithDB.repositories.EmployeeRepository;
+import com.example.MySpringApplicationWithDB.repositories.WorkProcessRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

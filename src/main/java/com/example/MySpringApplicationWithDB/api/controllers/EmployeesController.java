@@ -2,7 +2,7 @@ package com.example.MySpringApplicationWithDB.api.controllers;
 
 import com.example.MySpringApplicationWithDB.dto.EmployeeDto;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
-import com.example.MySpringApplicationWithDB.service.EmployeeService;
+import com.example.MySpringApplicationWithDB.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,11 @@
-package com.example.MySpringApplicationWithDB.enity;
+package com.example.MySpringApplicationWithDB.entities;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,4 +31,5 @@ public class Department {
     private List<Employee> employees;
 
     private boolean deleted = false;
+
 }
