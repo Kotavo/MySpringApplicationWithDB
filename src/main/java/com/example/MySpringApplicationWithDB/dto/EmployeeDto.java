@@ -2,9 +2,11 @@ package com.example.MySpringApplicationWithDB.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(exclude = "workProcessDto")
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeDto {
