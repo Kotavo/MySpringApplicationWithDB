@@ -3,9 +3,8 @@ package com.example.MySpringApplicationWithDB.controllers;
 import com.example.MySpringApplicationWithDB.api.controllers.DepartmentsController;
 import com.example.MySpringApplicationWithDB.dto.DepartmentDto;
 import com.example.MySpringApplicationWithDB.services.DepartmentService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -20,13 +19,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(DepartmentsController.class)
@@ -40,7 +36,7 @@ public class DepartmentControllerIntegrationTest {
 
     @Test
     void getDepartments() throws Exception {
-        DepartmentDto departmentDto = new DepartmentDto(1L,"name","loc",null);
+        DepartmentDto departmentDto = new DepartmentDto(1L, "name", "loc", null);
         List<DepartmentDto> departmentDtoList = new ArrayList<>();
         departmentDtoList.add(departmentDto);
         Mockito.when(departmentService.findAllDepartments()).thenReturn(departmentDtoList);
@@ -52,8 +48,8 @@ public class DepartmentControllerIntegrationTest {
     }
 
     @Test
-    void detDepartment() throws Exception{
-        DepartmentDto departmentDto = new DepartmentDto(1L,"name","loc",null);
+    void getDepartment() throws Exception {
+        DepartmentDto departmentDto = new DepartmentDto(1L, "name", "loc", null);
         Mockito.when(departmentService.findDepartmentById(1L)).thenReturn(departmentDto);
         mvc.perform(get("/department/{id}", 1L))
                 .andDo(print())
@@ -66,18 +62,44 @@ public class DepartmentControllerIntegrationTest {
 
     @Test
     void createDepartment() throws Exception {
-        DepartmentDto departmentDto = new DepartmentDto(null,"name","loc",null);
-        Mockito.when(departmentService.createDepartment(departmentDto))
-                .thenReturn(new DepartmentDto(1L,"name","loc",null));
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE,false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(departmentDto);
-        mvc.perform(post("/department").contentType(MediaType.APPLICATION_JSON)
+        DepartmentDto departmentDto = new DepartmentDto(null, "name", "loc", null);
+        DepartmentDto expectedDto = new DepartmentDto(1L, "name", "loc", null);
+        Mockito.when(departmentService.createDepartment(departmentDto)).thenReturn(expectedDto);
+
+        GsonBuilder builder = new GsonBuilder().serializeNulls();
+        Gson gson = builder.create();
+        String requestJson = gson.toJson(departmentDto);
+        String expectedJson = gson.toJson(expectedDto);
+
+        MvcResult mvcResult = mvc.perform(post("/department").contentType(MediaType.APPLICATION_JSON)
                 .content(requestJson))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andReturn();
+
+        String responseBody = mvcResult.getResponse().getContentAsString();
+        assertThat(responseBody).isEqualTo(expectedJson);
+    }
+
+    @Test
+    void updateDepartment() throws Exception {
+        DepartmentDto newDto = new DepartmentDto(null, "newLame", "newLoc", null);
+        DepartmentDto expectedDto = new DepartmentDto(1L, "newLame", "newLoc", null);
+        Mockito.when(departmentService.updateDepartment(1L, newDto)).thenReturn(expectedDto);
+
+        GsonBuilder builder = new GsonBuilder().serializeNulls();
+        Gson gson = builder.create();
+        String requestJson = gson.toJson(newDto);
+        String expectedJson = gson.toJson(expectedDto);
+
+        MvcResult mvcResult = mvc.perform(put("/department/{id}", 1L).contentType(MediaType.APPLICATION_JSON)
+                .content(requestJson))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String responseBody = mvcResult.getResponse().getContentAsString();
+        assertThat(responseBody).isEqualTo(expectedJson);
     }
 
 }
