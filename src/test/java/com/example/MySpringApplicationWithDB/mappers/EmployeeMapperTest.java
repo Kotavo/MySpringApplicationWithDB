@@ -20,7 +20,7 @@ public class EmployeeMapperTest {
     @Autowired
     private EmployeesMapper employeesMapper;
     @MockBean
-    private static DepartmentsMapper departmentsMapper;
+    private DepartmentsMapper departmentsMapper;
 
     private static EmployeeDto employeeDto;
     private static Employee employee;
