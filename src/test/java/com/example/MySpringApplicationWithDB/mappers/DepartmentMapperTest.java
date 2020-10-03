@@ -13,6 +13,8 @@ public class DepartmentMapperTest {
     private static DepartmentDto departmentDto;
     private static Department department;
 
+
+
     @BeforeAll
     static void setUp() {
         departmentsMapper = new DepartmentsMapperImpl();

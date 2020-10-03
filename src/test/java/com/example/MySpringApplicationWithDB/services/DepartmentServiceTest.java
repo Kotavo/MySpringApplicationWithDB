@@ -23,26 +23,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 public class DepartmentServiceTest {
 
-/*    @TestConfiguration
-    static class DepartmentServiceTestContextConfiguration{
-
-        @Bean
-        public DepartmentService departmentService(){
-            return new DepartmentService(departmentRepository(),departmentsMapper());
-        }
-
-        @Bean
-        public DepartmentsMapper departmentsMapper(){
-            return new DepartmentsMapperImpl();
-        }
-
-        @Bean
-        public DepartmentRepository departmentRepository(){
-            return Mockito.mock(DepartmentRepository.class);
-        }
-    }*/
-
-
     @Autowired
     private DepartmentsMapper departmentsMapper;
 
@@ -63,7 +43,7 @@ public class DepartmentServiceTest {
     }
 
     @Test
-    void FindAllDepartments() {
+    void findAllDepartments() {
         DepartmentDto departmentDto = new DepartmentDto();
         DepartmentDto departmentDto2 = new DepartmentDto();
         List<DepartmentDto> departmentDtoList = new ArrayList<>();
