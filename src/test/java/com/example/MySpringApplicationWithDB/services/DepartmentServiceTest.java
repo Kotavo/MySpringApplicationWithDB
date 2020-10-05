@@ -105,6 +105,6 @@ public class DepartmentServiceTest {
         Department depToDelete = new Department(1L, "depName", "depLoc", null, false);
         Mockito.when(departmentRepository.findById(1L)).thenReturn(java.util.Optional.of(depToDelete));
         departmentService.deleteDepartment(depToDelete.getId());
-        assertThat(true).isEqualTo(depToDelete.isDeleted());
+        assertThat(depToDelete.isDeleted()).isTrue();
     }
 }
