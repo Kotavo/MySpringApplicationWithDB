@@ -141,10 +141,11 @@
 							<version>${org.mapstruct.version}</version>
 						</path>
 					</annotationProcessorPaths>
-					<showWarnings>true</showWarnings>
+					<showWarnings>false</showWarnings>
 					<compilerArgs>
 						<compilerArg>
 							-Amapstruct.defaultComponentModel=spring
+							-Amapstruct.unmappedTargetPolicy=IGNORE
 						</compilerArg>
 					</compilerArgs>
 				</configuration>

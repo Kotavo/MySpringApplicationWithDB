@@ -5,9 +5,7 @@ import com.example.MySpringApplicationWithDB.entities.Department;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.mappers.DepartmentsMapper;
 import com.example.MySpringApplicationWithDB.repositories.DepartmentRepository;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,10 +13,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class DepartmentService {
+
     private final DepartmentRepository departmentRepository;
     private final DepartmentsMapper departmentsMapper;
+
+    public DepartmentService(DepartmentRepository departmentRepository, DepartmentsMapper departmentsMapper) {
+        this.departmentRepository = departmentRepository;
+        this.departmentsMapper = departmentsMapper;
+    }
 
     public List<DepartmentDto> findAllDepartments() {
         return departmentRepository.findAll().stream().map(departmentsMapper::fromDepartment).collect(Collectors.toList());

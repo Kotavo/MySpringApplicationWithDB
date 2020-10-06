@@ -7,7 +7,6 @@ import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.mappers.WorkProcessesMapper;
 import com.example.MySpringApplicationWithDB.repositories.EmployeeRepository;
 import com.example.MySpringApplicationWithDB.repositories.WorkProcessRepository;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +15,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class WorkProcessService {
 
     private final WorkProcessRepository workProcessRepository;
     private final EmployeeRepository employeeRepository;
     private final WorkProcessesMapper workProcessesMapper;
+
+    public WorkProcessService(WorkProcessRepository workProcessRepository, EmployeeRepository employeeRepository, WorkProcessesMapper workProcessesMapper) {
+        this.workProcessRepository = workProcessRepository;
+        this.employeeRepository = employeeRepository;
+        this.workProcessesMapper = workProcessesMapper;
+    }
 
     public List<WorkProcessDto> findAllWorkProcesses() {
         return workProcessRepository.findAll().stream().map(workProcessesMapper::fromWorkProcess).collect(Collectors.toList());

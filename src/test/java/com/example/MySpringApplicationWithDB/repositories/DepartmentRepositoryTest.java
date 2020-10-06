@@ -49,7 +49,7 @@ public class DepartmentRepositoryTest {
     @Test
     @DisplayName("When find All Department then return list.size > 0")
     @Order(3)
-    void findAllDepartment() {
+    void findAllDepartments() {
         List<Department> foundDepartments = departmentRepository.findAll();
         assertThat(foundDepartments.size()).isGreaterThan(0);
     }

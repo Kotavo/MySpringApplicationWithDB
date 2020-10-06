@@ -49,7 +49,7 @@ public class EmployeeRepositoryTest {
 
     @Test
     @Order(2)
-    void findDepartmentById() {
+    void findEmployeeById() {
         Optional<Employee> OptEmployee = employeeRepository.findById(1L);
         Employee employee = new Employee();
         if (OptEmployee.isPresent()) {
@@ -60,14 +60,14 @@ public class EmployeeRepositoryTest {
 
     @Test
     @Order(3)
-    void findAllDepartment() {
+    void findAllEmployees() {
         List<Employee> foundEmployee = employeeRepository.findAll();
         assertThat(foundEmployee.size()).isGreaterThan(0);
     }
 
     @Test
     @Order(4)
-    void updateDepartmentById() {
+    void updateEmployeeById() {
         Optional<Employee> empToUpdateOptional = employeeRepository.findById(1L);
         Department newDep = new Department();
         newDep.setId(2L);
@@ -91,7 +91,7 @@ public class EmployeeRepositoryTest {
 
     @Test
     @Order(5)
-    void deleteDepartmentById() {
+    void deleteEmployeeById() {
         Optional<Employee> OptEmp = employeeRepository.findById(1L);
         Employee employee = OptEmp.get();
         employeeRepository.deleteById(employee.getId());

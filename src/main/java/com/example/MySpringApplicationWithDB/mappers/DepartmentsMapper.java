@@ -6,7 +6,6 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-
 @Mapper(uses = EmployeesMapper.class)
 public interface DepartmentsMapper {
 
