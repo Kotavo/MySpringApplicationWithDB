@@ -1,6 +1,6 @@
 CREATE TABLE public.employees
 (
-    id bigint NOT NULL,
+    id bigserial NOT NULL,
     deleted boolean NOT NULL,
     mail character varying(255),
     name character varying(255),

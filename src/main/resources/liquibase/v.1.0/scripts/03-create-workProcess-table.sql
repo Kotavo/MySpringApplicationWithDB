@@ -1,6 +1,6 @@
 CREATE TABLE public.workprocesses
 (
-    id bigint NOT NULL,
+    id bigserial NOT NULL,
     deleted boolean NOT NULL,
     description character varying(255),
     employee_id bigint NOT NULL,
