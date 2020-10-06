@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd"
+        logicalFilePath="path-independent">
+
+
+    <changeSet id="1" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql"
+                 encoding="UTF-8"
+                 endDelimiter="\nANDNEXTSCRIPT"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="/scripts/01-create-departments-table.sql"/>
+    </changeSet>
+    <changeSet id="2" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql"
+                 encoding="UTF-8"
+                 endDelimiter="\nANDNEXTSCRIPT"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="/scripts/02-create-employees-table.sql"/>
+    </changeSet>
+    <changeSet id="3" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql"
+                 encoding="UTF-8"
+                 endDelimiter="\nANDNEXTSCRIPT"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="/scripts/03-create-workProcess-table.sql"/>
+    </changeSet>
+    <changeSet id="4" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql"
+                 encoding="UTF-8"
+                 endDelimiter="\nANDNEXTSCRIPT"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="/scripts/04-constraint-employees.sql"/>
+    </changeSet>
+    <changeSet id="5" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql"
+                 encoding="UTF-8"
+                 endDelimiter="\nANDNEXTSCRIPT"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="/scripts/05-constraint-workProcesses.sql"/>
+    </changeSet>
+
+</databaseChangeLog>
