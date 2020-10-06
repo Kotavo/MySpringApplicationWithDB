@@ -6,10 +6,3 @@ CREATE TABLE public.departments
     name character varying(255),
     CONSTRAINT departments_pkey PRIMARY KEY (id)
 );
-
-/*ANDNEXTSCRIPT
-
-ALTER TABLE public.departments
-    ADD CONSTRAINT departments_pkey PRIMARY KEY (id);
-
-ANDNEXTSCRIPT*/
