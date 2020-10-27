@@ -7,49 +7,28 @@
         logicalFilePath="path-independent">
 
 
-    <changeSet id="1" author="Dmitriy_Sergeev">
-        <sqlFile dbms="postgresql"
-                 encoding="UTF-8"
-                 endDelimiter="\nANDNEXTSCRIPT"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"
+    <changeSet id="1.0.1" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
                  path="/scripts/01-create-departments-table.sql"/>
     </changeSet>
-    <changeSet id="2" author="Dmitriy_Sergeev">
-        <sqlFile dbms="postgresql"
-                 encoding="UTF-8"
-                 endDelimiter="\nANDNEXTSCRIPT"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"
+
+    <changeSet id="1.0.2" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
                  path="/scripts/02-create-employees-table.sql"/>
     </changeSet>
-    <changeSet id="3" author="Dmitriy_Sergeev">
-        <sqlFile dbms="postgresql"
-                 encoding="UTF-8"
-                 endDelimiter="\nANDNEXTSCRIPT"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"
+
+    <changeSet id="1.0.3" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
                  path="/scripts/03-create-workProcess-table.sql"/>
     </changeSet>
-    <changeSet id="4" author="Dmitriy_Sergeev">
-        <sqlFile dbms="postgresql"
-                 encoding="UTF-8"
-                 endDelimiter="\nANDNEXTSCRIPT"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"
+
+    <changeSet id="1.0.4" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
                  path="/scripts/04-constraint-employees.sql"/>
     </changeSet>
-    <changeSet id="5" author="Dmitriy_Sergeev">
-        <sqlFile dbms="postgresql"
-                 encoding="UTF-8"
-                 endDelimiter="\nANDNEXTSCRIPT"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"
+
+    <changeSet id="1.0.5" author="Dmitriy_Sergeev">
+        <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
                  path="/scripts/05-constraint-workProcesses.sql"/>
     </changeSet>
 
