@@ -2,21 +2,17 @@ package com.example.MySpringApplicationWithDB.security;
 
 import com.example.MySpringApplicationWithDB.entities.Role;
 import io.jsonwebtoken.*;
-import liquibase.pro.packaged.D;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
-import java.net.http.HttpHeaders;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -34,10 +30,10 @@ public class JwtTokenProvider {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @PostConstruct
+/*    @PostConstruct
     protected void init() {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
-    }
+    }*/
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
