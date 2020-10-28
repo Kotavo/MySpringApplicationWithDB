@@ -8,6 +8,7 @@ import com.example.MySpringApplicationWithDB.mappers.WorkProcessesMapper;
 import com.example.MySpringApplicationWithDB.repositories.EmployeeRepository;
 import com.example.MySpringApplicationWithDB.repositories.WorkProcessRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class WorkProcessService {
     private final EmployeeRepository employeeRepository;
     private final WorkProcessesMapper workProcessesMapper;
 
+    @Autowired
     public WorkProcessService(WorkProcessRepository workProcessRepository, EmployeeRepository employeeRepository, WorkProcessesMapper workProcessesMapper) {
         this.workProcessRepository = workProcessRepository;
         this.employeeRepository = employeeRepository;

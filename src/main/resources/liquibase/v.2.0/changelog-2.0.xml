@@ -6,29 +6,31 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
 
-    <changeSet id="1.0.1" author="Dmitriy_Sergeev">
+    <changeSet id="2.0.1" author="Dmitriy_Sergeev">
         <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
-                 path="/scripts/1.0.1-create-departments-table.sql"/>
+                 path="/scripts/2.0.1-create-roles-table.sql"/>
     </changeSet>
 
-    <changeSet id="1.0.2" author="Dmitriy_Sergeev">
+
+    <changeSet id="2.0.3" author="Dmitriy_Sergeev">
         <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
-                 path="/scripts/1.0.2-create-employees-table.sql"/>
+                 path="/scripts/2.0.2-update-employees-table.sql"/>
     </changeSet>
 
-    <changeSet id="1.0.3" author="Dmitriy_Sergeev">
+
+    <changeSet id="2.0.5" author="Dmitriy_Sergeev">
         <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
-                 path="/scripts/1.0.3-create-workProcess-table.sql"/>
+                 path="/scripts/2.0.3-create-employeesRoles-table.sql"/>
     </changeSet>
 
-    <changeSet id="1.0.4" author="Dmitriy_Sergeev">
+    <changeSet id="2.0.8" author="Dmitriy_Sergeev">
         <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
-                 path="/scripts/1.0.4-constraint-employees.sql"/>
+                 path="/scripts/2.0.4-constraint-employeeRole-employee.sql"/>
     </changeSet>
 
-    <changeSet id="1.0.5" author="Dmitriy_Sergeev">
+    <changeSet id="2.0.9" author="Dmitriy_Sergeev">
         <sqlFile dbms="postgresql" relativeToChangelogFile="true" splitStatements="true" stripComments="true"
-                 path="/scripts/1.0.5-constraint-workProcesses.sql"/>
+                 path="/scripts/2.0.5-constraint-employeeRole-role.sql"/>
     </changeSet>
 
 </databaseChangeLog>

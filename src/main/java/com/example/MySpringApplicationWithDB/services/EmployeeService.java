@@ -3,11 +3,14 @@ package com.example.MySpringApplicationWithDB.services;
 import com.example.MySpringApplicationWithDB.dto.EmployeeDto;
 import com.example.MySpringApplicationWithDB.entities.Department;
 import com.example.MySpringApplicationWithDB.entities.Employee;
+import com.example.MySpringApplicationWithDB.entities.Role;
 import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.mappers.EmployeesMapper;
 import com.example.MySpringApplicationWithDB.repositories.DepartmentRepository;
 import com.example.MySpringApplicationWithDB.repositories.EmployeeRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +23,11 @@ public class EmployeeService {
     private final DepartmentRepository departmentRepository;
     private final EmployeeRepository employeeRepository;
     private final EmployeesMapper employeesMapper;
+  //  private final BCryptPasswordEncoder passwordEncoder;
 
-    public EmployeeService(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository, EmployeesMapper employeesMapper) {
+    @Autowired
+    public EmployeeService(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository,
+                           EmployeesMapper employeesMapper) {
         this.departmentRepository = departmentRepository;
         this.employeeRepository = employeeRepository;
         this.employeesMapper = employeesMapper;
@@ -40,6 +46,7 @@ public class EmployeeService {
     @Transactional
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
         Employee employee = employeesMapper.toEmployee(employeeDto);
+      //  employee.setPassword(passwordEncoder.encode(employeeDto.getPassword()));
         employeeRepository.save(employee);
         employeeDto.setId(employee.getId());
         return employeeDto;
@@ -59,6 +66,9 @@ public class EmployeeService {
         }
         if (StringUtils.isNoneBlank(employeeDto.getMail())) {
             employee.setName(employeeDto.getMail());
+        }
+        if (StringUtils.isNoneBlank(employeeDto.getPassword())) {
+            employee.setPassword(employeeDto.getPassword());
         }
         if (employeeDto.getDepartmentDto().getId() != null) {
             Department department = departmentRepository.findById(employeeDto.getDepartmentDto().getId()).orElseThrow(() -> new NotFoundException("dfd"));
