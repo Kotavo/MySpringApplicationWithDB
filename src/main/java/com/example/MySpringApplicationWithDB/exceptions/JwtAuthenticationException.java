@@ -1,4 +1,4 @@
-package com.example.MySpringApplicationWithDB.security;
+package com.example.MySpringApplicationWithDB.exceptions;
 
 
 import org.springframework.security.core.AuthenticationException;
