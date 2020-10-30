@@ -53,17 +53,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .apply(jwtConfigurer);
 
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
 /*
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().mvcMatchers(LOGIN_ENDPOINT);
         web.ignoring().antMatchers(LOGIN_ENDPOINT);
     }*/
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
 
 /*    @Override
     public void configure(WebSecurity web) {
