@@ -6,6 +6,7 @@ import com.example.MySpringApplicationWithDB.exceptions.NotFoundException;
 import com.example.MySpringApplicationWithDB.mappers.DepartmentsMapper;
 import com.example.MySpringApplicationWithDB.repositories.DepartmentRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final DepartmentsMapper departmentsMapper;
 
+    @Autowired
     public DepartmentService(DepartmentRepository departmentRepository, DepartmentsMapper departmentsMapper) {
         this.departmentRepository = departmentRepository;
         this.departmentsMapper = departmentsMapper;

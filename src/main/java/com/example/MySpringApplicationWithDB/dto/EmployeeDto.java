@@ -19,6 +19,8 @@ public class EmployeeDto {
 
     private String mail;
 
+    private String password;
+
     private DepartmentDto departmentDto;
 
     private WorkProcessDto workProcessDto;
