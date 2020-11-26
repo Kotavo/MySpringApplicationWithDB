@@ -158,8 +158,10 @@
 					<showWarnings>false</showWarnings>
 					<compilerArgs>
 						<compilerArg>
-							-Amapstruct.defaultComponentModel=spring
 							-Amapstruct.unmappedTargetPolicy=IGNORE
+						</compilerArg>
+						<compilerArg>
+							-Amapstruct.defaultComponentModel=spring
 						</compilerArg>
 					</compilerArgs>
 				</configuration>
