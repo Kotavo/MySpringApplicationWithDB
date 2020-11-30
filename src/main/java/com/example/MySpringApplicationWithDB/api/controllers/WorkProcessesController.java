@@ -52,4 +52,8 @@ public class WorkProcessesController {
     public void deleteWorkProcess(@PathVariable Long id) throws NotFoundException {
         workProcessService.deleteWorkProcess(id);
     }
+
+    public void test() {
+
+    }
 }
