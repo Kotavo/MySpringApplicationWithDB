@@ -49,8 +49,4 @@ public class EmployeesController {
     public void deleteEmployee(@PathVariable Long id) throws NotFoundException {
         employeeService.deleteEmployee(id);
     }
-
-    public void some() {
-
-    }
 }
