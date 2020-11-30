@@ -50,4 +50,7 @@ public class EmployeesController {
         employeeService.deleteEmployee(id);
     }
 
+    public void some() {
+
+    }
 }
